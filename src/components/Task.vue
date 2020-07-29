@@ -1,13 +1,18 @@
 <template>
   <div>
     <form @submit.prevent="addTask">
-      <input type="text" class="input-todo" v-model="newTask.title" placeholder="Title" />
+      <input
+        type="text"
+        class="input-todo"
+        v-model="newTask.title"
+        placeholder="Title"
+      />
       <input type="date" class="input-todo" v-model="newTask.due" />
       <button type="submit" class="input-button">Add</button>
     </form>
-    <ul v-for="(task,index) in tasks" :key="index" class="tasklist">
+    <ul v-for="(task, index) in tasks" :key="index" class="tasklist">
       <li>
-        <span>{{task.title}} {{task.due}} {{task.status}}</span>
+        <span>{{ task.title }} {{ task.due }} {{ task.status }}</span>
         <span @click="deleteTask(index)" class="delete">×</span>
       </li>
     </ul>
@@ -16,7 +21,7 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       newTask: {
         title: "",
@@ -34,13 +39,13 @@ export default {
   },
   watch: {
     tasks: {
-      handler: function () {
+      handler: function() {
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
       },
       deep: true,
     },
   },
-  mounted: function () {
+  mounted: function() {
     this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   },
   methods: {

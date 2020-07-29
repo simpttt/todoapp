@@ -1,15 +1,15 @@
 <template>
   <div class="Board">
-    <AddTask />
+    <Task />
   </div>
 </template>
 
 <script>
-import AddTask from "./AddTask";
+import Task from "./Task.vue";
 export default {
   name: "Board",
   components: {
-    AddTask,
+    Task,
   },
 };
 </script>
@@ -20,5 +20,3 @@ export default {
   background-color: rgb(232, 244, 248);
 }
 </style>
-
-
