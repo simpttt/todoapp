@@ -87,5 +87,3 @@ export default {
   float: right;
 }
 </style>
-
-// template
