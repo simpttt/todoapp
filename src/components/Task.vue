@@ -1,19 +1,21 @@
 <template>
   <div>
     <form @submit.prevent="addTask">
-      <input
-        type="text"
-        class="input-todo"
-        v-model="newTask.title"
-        placeholder="Title"
-      />
+      <input type="text" class="input-todo" v-model="newTask.title" placeholder="Title" />
       <input type="date" class="input-todo" v-model="newTask.due" />
       <button type="submit" class="input-button">Add</button>
     </form>
     <ul v-for="(task, index) in tasks" :key="index" class="tasklist">
       <li>
-        <span>{{ task.title }} {{ task.due }} {{ task.status }}</span>
-        <span @click="deleteTask(index)" class="delete">×</span>
+        <span>
+          <strong>{{ task.title }}</strong>
+          <br />
+          {{ task.due }} {{ task.status }}
+        </span>
+        <span class="edit_delete">
+          <span @click="editTask(index)" class="edit">edit</span>
+          <span @click="deleteTask(index)" class="delete">×</span>
+        </span>
       </li>
     </ul>
   </div>
@@ -21,7 +23,7 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       newTask: {
         title: "",
@@ -39,13 +41,13 @@ export default {
   },
   watch: {
     tasks: {
-      handler: function() {
+      handler: function () {
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
       },
       deep: true,
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   },
   methods: {
@@ -53,6 +55,9 @@ export default {
       this.newTask.status = "未了";
       this.tasks.push(this.newTask);
       this.newTask = {};
+    },
+    editTask(index) {
+      index;
     },
     deleteTask(index) {
       if (confirm("are you sure?")) {
@@ -81,8 +86,7 @@ export default {
 .input-button {
   height: 50px;
 }
-
-.delete {
+.edit_delete {
   cursor: pointer;
   float: right;
 }
